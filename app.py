@@ -6,14 +6,28 @@ from torchvision.models.detection.faster_rcnn import FastRCNNPredictor
 import torchvision.transforms as T
 from PIL import Image
 import numpy as np
+import gdown # Added gdown
+
+# Function to download the model weights from Google Drive
+def download_model_weights():
+    # Replace 'YOUR_FILE_ID' with the shareable ID from your Google Drive link
+    file_id = 'https://drive.google.com/file/d/1ru-RrKPV--mqns85VaxAlvvADU64e7Fp/view?usp=sharing'
+    output_path = 'karuvelam_model_weights.pth'
+    
+    # Download the file
+    gdown.download(f'https://drive.google.com/uc?id={file_id}', output_path, quiet=False)
 
 # Load the trained model
 def load_model():
+    # First, download the model weights
+    download_model_weights()
+    
     num_classes = 2
     model = fasterrcnn_resnet50_fpn(weights='FasterRCNN_ResNet50_FPN_Weights.DEFAULT')
     in_features = model.roi_heads.box_predictor.cls_score.in_features
     model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
-    model.load_state_dict(torch.load("model/karuvelam_model_weights.pth", map_location=torch.device('cpu')))
+    # Load the state dict from the downloaded file
+    model.load_state_dict(torch.load("karuvelam_model_weights.pth", map_location=torch.device('cpu')))
     model.eval()
     return model
 
