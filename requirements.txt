@@ -3,3 +3,4 @@ torchvision
 numpy
 gradio
 Pillow
+gdown
