@@ -11,7 +11,7 @@ import gdown # Added gdown
 # Function to download the model weights from Google Drive
 def download_model_weights():
     # Replace 'YOUR_FILE_ID' with the shareable ID from your Google Drive link
-    file_id = 'https://drive.google.com/file/d/1ru-RrKPV--mqns85VaxAlvvADU64e7Fp/view?usp=sharing'
+    file_id = '1ru-RrKPV--mqns85VaxAlvvADU64e7Fp/view?usp=sharing'
     output_path = 'karuvelam_model_weights.pth'
     
     # Download the file
